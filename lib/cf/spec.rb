@@ -1,6 +1,6 @@
 require "cf/spec/version"
 
-module Cf
+module CF
   module Spec
     # Your code goes here...
   end
