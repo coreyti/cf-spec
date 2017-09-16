@@ -1,3 +1,6 @@
 #!/usr/bin/env ruby
 
-require "cf-spec"
+require "cf/spec"
+require "cf/spec/cli"
+
+CF::Spec::CLI.start(ARGV)

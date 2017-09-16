@@ -1,5 +1,6 @@
 require "cf/spec/version"
 
+require "cf/spec/context"
 require "cf/spec/runner"
 require "cf/spec/transports"
 require "cf/spec/ui"
