@@ -3,17 +3,34 @@ module CF::Spec
     class Base
       attr_reader :ui, :env
 
-      def initialize(ui = UI.new, env = {}, &block)
+      def initialize(ui = UI.new, env = {})
         @ui  = ui
         @env = env
-        instance_exec(&block) if block_given?
+      end
+
+      def config(uri = nil)
+        unless uri.nil?
+          @config = {
+            host: uri.hostname,
+            user: uri.user,
+            pass: uri.password,
+            path: uri.path,
+            frag: uri.fragment
+          }
+        end
+
+        @config || {}
       end
 
       def run(script, &block)
-        execute!(executable(script), &block)
+        execute!(bash(script), &block)
       end
 
       protected
+
+      def executable(command)
+        raise NotImplementedError
+      end
 
       def execute!(script, &block)
         raise NotImplementedError
@@ -28,9 +45,9 @@ module CF::Spec
         string.gsub(/^[ \t]{#{indent}}/, '').strip
       end
 
-      def executable(script)
-        content = clean(script).gsub(/"/, '\"').gsub(/\$/, "\\$")
-        %Q{bash -c "#{content}"}
+      def bash(script)
+        command = clean(script).gsub(/"/, '\"').gsub(/\$/, "\\$")
+        %Q{bash -c "#{executable(command)}"}
       end
     end
   end
