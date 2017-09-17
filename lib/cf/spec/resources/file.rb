@@ -3,13 +3,16 @@ module CF::Spec
     class File < Base
       def initialize(backend, path)
         super
-        @backend = backend
-        @path    = path
-        @file    = backend.file(path)
+        @path = path
+        @file = backend.file(path)
       end
 
       def exist?
         @file.exist?
+      end
+
+      def read
+        @file.read
       end
 
       # ---

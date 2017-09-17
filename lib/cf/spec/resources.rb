@@ -17,8 +17,6 @@ module CF::Spec
     end
 
     class Base
-      attr_reader :backend
-
       def initialize(backend, *args)
         @backend = backend
       end

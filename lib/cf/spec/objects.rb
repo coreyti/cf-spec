@@ -3,8 +3,8 @@ module CF::Spec
     class << self
       def define(backend, base, &block)
         cls = Class.new(self.const_get(base, false)) do
-          define_method :evaluate do |string|
-            backend.send(:command, string)
+          define_method :evaluate do |string, &block|
+            backend.send(:command, string, &block)
           end
           private :evaluate
         end
