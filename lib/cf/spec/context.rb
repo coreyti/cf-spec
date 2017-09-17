@@ -1,37 +1,35 @@
 module CF::Spec
   class Context
     class << self
-      # NOTE: this is a bit odd if the thing is a singleton
-      def build(config)
-        @config = config
-        instance.__binding__
-      end
-
-      private
-
-      def instance
-        @instance ||= self.new(@config)
+      def build(config:)
+        self.new(config).__binding__
       end
     end
 
     def initialize(config)
-      @resources = [].tap do |result|
-        result << CF::Spec::Backends.load(config.target)
-      end
+      @config  = config
+      @backend = CF::Spec::Backends.load(@config.target)
     end
 
     protected
 
     def method_missing(method_name, *args, &block)
-      handler = @resources.first do |resource|
-        resource.respond_to?(method_name)
-      end
-
-      handler ? handler.send(method_name, *args, &block) : super
+      resource = resources[method_name]
+      resource ? resource.new(@backend, *args, &block) : super
     end
 
     def respond_to_missing?(method_name, include_private = false)
-      @resources.any? { |resource| resource.respond_to?(method_name) } || super
+      !! resources[method_name]
+    end
+
+    private
+
+    def resources
+      @resources ||= {}.tap do |result|
+        CF::Spec::Resources.each do |name, impl|
+          result[name.intern] = impl
+        end
+      end
     end
   end
 end

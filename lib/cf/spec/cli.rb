@@ -14,7 +14,8 @@ module CF::Spec
     shared
     def repl
       config = Configuration.new(options.dup)
-      CF::Spec::REPL.new(config: config).start
+      runner = CF::Spec::Runner.new(config: config)
+      CF::Spec::REPL.new(runner: runner).start
     end
   end
 end

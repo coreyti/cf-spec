@@ -3,14 +3,14 @@ require 'uri'
 
 module CF::Spec
   class REPL
-    def initialize(prompt: "cf-spec → ", config: Configuration.new) # TODO: share prompt with CLI
+    def initialize(prompt: "cf-spec → ", runner:) # TODO: share prompt with CLI
       @prompt = prompt
-      @config = config.dup # or, does it want to be shared?
+      @runner = runner
     end
 
     def start
       reset
-      context.pry
+      @runner.context.pry
     end
 
     private

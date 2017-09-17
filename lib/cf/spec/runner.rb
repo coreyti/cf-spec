@@ -2,28 +2,12 @@ require 'uri'
 
 module CF::Spec
   class Runner
-    # attr_reader :ui, :env
-    #
-    # def initialize(ui = UI.new, env = {})
-    #   @ui  = ui
-    #   @env = env
-    # end
-    #
-    # def run(script, &block)
-    #   @transport.run(script, &block)
-    # end
-    #
-    # def target(uri)
-    #   @transport = begin
-    #     parsed = URI.parse(uri)
-    #     result = Transports.find(parsed.scheme).new
-    #     result.config(parsed)
-    #     result
-    #   end
-    # end
+    def initialize(config: Configuration.new)
+      @config  = config.dup
+    end
 
-    def initialize(config = {})
-      @config = config.dup
+    def context
+      @context ||= Context.build(config: @config)
     end
   end
 end
