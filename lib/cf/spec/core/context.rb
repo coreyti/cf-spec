@@ -1,14 +1,8 @@
-module CF::Spec
+module CF::Spec::Core
   class Context
-    class << self
-      def build(config:)
-        self.new(config).__binding__
-      end
-    end
-
-    def initialize(config)
+    def initialize(config:)
       @config  = config
-      @backend = CF::Spec::Backends.load(@config.target)
+      @backend = CF::Spec::Core::Backends.load(@config.target)
     end
 
     protected
@@ -26,7 +20,7 @@ module CF::Spec
 
     def resources
       @resources ||= {}.tap do |result|
-        CF::Spec::Resources.each do |name, impl|
+        CF::Spec::Core::Resources.each do |name, impl|
           result[name.intern] = impl
         end
       end

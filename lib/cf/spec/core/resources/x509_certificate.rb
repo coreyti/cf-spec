@@ -1,6 +1,6 @@
 require 'openssl'
 
-module CF::Spec
+module CF::Spec::Core
   module Resources
     class X509_Certificate < Base
       def initialize(backend, path)
@@ -30,7 +30,7 @@ module CF::Spec
       end
 
       def inspect
-        "#<CF::Spec::Resources::X509_Certificate:0x#{self.__id__.to_s(16)} @backend=#{@backend.type} @path=#{@path}>"
+        "#<CF::Spec::Core::Resources::X509_Certificate:0x#{self.__id__.to_s(16)} @backend=#{@backend.type} @path=#{@path}>"
       end
 
       private

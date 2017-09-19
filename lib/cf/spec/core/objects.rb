@@ -1,4 +1,5 @@
-module CF::Spec
+module CF::Spec::Core
+  # TODO: Courier ?
   module Objects
     class << self
       def define(backend, base, &block)

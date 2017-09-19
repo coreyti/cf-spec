@@ -1,4 +1,4 @@
-module CF::Spec
+module CF::Spec::Core
   module Resources
     class File < Base
       def initialize(backend, path)
@@ -22,7 +22,7 @@ module CF::Spec
       end
 
       def inspect
-        "#<CF::Spec::Resources::File:0x#{self.__id__.to_s(16)} @backend=#{@backend.type} @path=#{@path}>"
+        "#<CF::Spec::Core::Resources::File:0x#{self.__id__.to_s(16)} @backend=#{@backend.type} @path=#{@path}>"
       end
     end
   end

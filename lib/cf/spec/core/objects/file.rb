@@ -1,4 +1,4 @@
-module CF::Spec
+module CF::Spec::Core
   module Objects
     class File
       def initialize(path)

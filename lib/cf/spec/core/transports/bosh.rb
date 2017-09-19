@@ -1,6 +1,4 @@
-require 'open3'
-
-module CF::Spec
+module CF::Spec::Core
   module Transports
     class BOSH < Base
       def command(params)

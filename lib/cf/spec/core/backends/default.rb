@@ -1,4 +1,4 @@
-module CF::Spec
+module CF::Spec::Core
   module Backends
     class Default < Base
       def example

@@ -1,4 +1,4 @@
-module CF::Spec
+module CF::Spec::Core
   module Resources
     class << self
       def each(*args, &block)

@@ -1,9 +1,10 @@
 require 'pry'
 require 'uri'
 
-module CF::Spec
+module CF::Spec::CLI::Commands
   class REPL
-    def initialize(prompt: "cf-spec → ", runner:) # TODO: share prompt with CLI
+    # TODO: share prompt (prefix) with CLI
+    def initialize(prompt: "cf-spec → ", runner:)
       @prompt = prompt
       @runner = runner
     end
@@ -20,16 +21,6 @@ module CF::Spec
 
       Pry.config.prompt_name = @prompt
       Pry.prompt = [proc { "#{style("\e[0;32m")}#{Pry.config.prompt_name}#{style("\e[0m")}" }]
-    end
-
-    # ---
-
-    # compose commands from:
-    # - target   (backends)
-    # - toolbelt (e.g., cfdot)
-    # - profiles (or kits, bundles, ...)
-    def context
-      @context ||= Context.build(@config)
     end
 
     # ---

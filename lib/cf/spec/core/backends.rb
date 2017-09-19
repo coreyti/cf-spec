@@ -1,10 +1,10 @@
 require 'uri'
 
-module CF::Spec
+module CF::Spec::Core
   module Backends
     class << self
       def find(name)
-        store[name] || CF::Spec::Backends::Default
+        store[name] || CF::Spec::Core::Backends::Default
       end
 
       def load(uri)

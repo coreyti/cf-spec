@@ -1,4 +1,4 @@
-module CF::Spec
+module CF::Spec::Core
   module Backends
     class BOSH < Base
       def file(path)
